@@ -1,6 +1,5 @@
 package tictactoe;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -15,43 +14,59 @@ public class Main {
         }
         System.out.println("---------");
 
+        boolean xWins = false;
+        boolean oWins = false;
+        int xCount = 0;
+        int oCount = 0;
+        boolean empty = false;
 
-        int n = 3;
-        String[][] matrix = new String[n][n];
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                matrix[i][j] = scanner.next();
+        for (int i = 0; i < cells.length(); i++) {
+            if (cells.charAt(i) == 'X') {
+                xCount++;
+            }
+            if (cells.charAt(i) == 'O') {
+                oCount++;
+            }
+            if (cells.charAt(i) == '_') {
+                empty = true;
             }
         }
+        if (cells.charAt(0) == 'X' && cells.charAt(4) == 'X' && cells.charAt(8) == 'X' ||
+                cells.charAt(2) == 'X' && cells.charAt(4) == 'X' && cells.charAt(6) == 'X' ||
+                cells.charAt(1) == 'X' && cells.charAt(4) == 'X' && cells.charAt(7) == 'X' ||
+                cells.charAt(0) == 'X' && cells.charAt(3) == 'X' && cells.charAt(4) == 'X' ||
+                cells.charAt(2) == 'X' && cells.charAt(5) == 'X' && cells.charAt(8) == 'X') {
+            xWins = true;
+        }
+        if (cells.charAt(0) == 'O' && cells.charAt(4) == 'O' && cells.charAt(8) == 'O' ||
+                cells.charAt(2) == 'O' && cells.charAt(4) == 'O' && cells.charAt(6) == 'O' ||
+                cells.charAt(1) == 'O' && cells.charAt(4) == 'O' && cells.charAt(7) == 'O' ||
+                cells.charAt(0) == 'O' && cells.charAt(3) == 'O' && cells.charAt(4) == 'O' ||
+                cells.charAt(2) == 'O' && cells.charAt(5) == 'O' && cells.charAt(8) == 'O') {
+            oWins = true;
+        }
+        if (cells.charAt(0) == 'X' && cells.charAt(1) == 'X' && cells.charAt(2) == 'X' ||
+                cells.charAt(3) == 'X' && cells.charAt(4) == 'X' && cells.charAt(5) == 'X' ||
+                cells.charAt(6) == 'X' && cells.charAt(7) == 'X' && cells.charAt(8) == 'X') {
+            xWins = true;
+        }
+        if (cells.charAt(0) == 'O' && cells.charAt(1) == 'O' && cells.charAt(2) == 'O' ||
+                cells.charAt(3) == 'O' && cells.charAt(4) == 'O' && cells.charAt(5) == 'O' ||
+                cells.charAt(6) == 'O' && cells.charAt(7) == 'O' && cells.charAt(8) == 'O') {
+            oWins = true;
 
-
-
-        String[] cellMatrix = cells.split("(?<=\\G.)");
-        int count=0;
-        System.out.println(cellMatrix.length);
-
-        //for (int i =0; i < cellMatrix.length;i++){
-
-        if (cells.startsWith("XXX")) {
+        }
+        if (xWins) {
             System.out.println("X wins");
-        }
-        if (cells.startsWith("OOO")) {
+        } else if (oWins && !empty) {
             System.out.println("O wins");
+        } else if (xCount == oCount && empty) {
+            System.out.println("Game not finished");
+        } else if (!xWins && !oWins && !empty) {
+            System.out.println("Draw");
+        } else if (xWins && oWins || xCount > oCount || oCount > xCount) {
+            System.out.println("Impossible");
         }
-        if (cells.substring(1,2).equals("XXX")){
-
-            //   for (int j = 0; j < cellMatrix.length;j++){
-            //      cellMatrix[i][j]= Arrays.toString(cells.split("(?<=\\G.)"));
-        }
-        // }
-        //   for (int i =0; i < cellMatrix.length;i++){
-        // for (int j = 0; j < cellMatrix.length;j++){
-        //     System.out.println(cellMatrix[i][j] + " ");
-        //  }
-        // System.out.println();
-        //}
-        //   System.out.println(cellMatrix[0][0] + " ");
 
     }
 
